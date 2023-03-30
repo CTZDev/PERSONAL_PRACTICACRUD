@@ -1,0 +1,10 @@
+//PRODUCTO
+
+CREATE TABLE IF NOT EXISTS tm_product (
+    product_id INT(11) NOT NULL AUTO_INCREMENT,
+    product_name VARCHAR(150),
+    date_create DATETIME NOT NULL,
+    date_update DATETIME NULL,
+    date_delete DATETIME NULL,
+    state BIT DEFAULT 1,
+    PRIMARY KEY(product_id));
