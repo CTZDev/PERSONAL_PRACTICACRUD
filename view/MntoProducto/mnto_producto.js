@@ -1,6 +1,10 @@
 let $table;
 
-function init() {}
+function init() {
+  $("#md_form_product").on("submit", function (e) {
+    addNewProduct(e);
+  });
+}
 
 $(document).ready(function () {
   $table = $("#product_data")
@@ -11,7 +15,7 @@ $(document).ready(function () {
       buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdf"],
       ajax: {
         url: "../../controller/product.php?op=listAll",
-        type: "get",
+        method: "GET",
         dataType: "json",
         error: function (e) {
           console.log(e.responseText);
@@ -48,6 +52,68 @@ $(document).ready(function () {
       },
     })
     .DataTable();
+});
+
+function addNewProduct(e) {
+  e.preventDefault();
+
+  //Capture only names from the form of HTML (modalmantenimiento)
+  let formData = new FormData($("#md_form_product")[0]);
+
+  $.ajax({
+    url: "../../controller/product.php?op=addProduct",
+    type: "POST",
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function () {
+      $("#md_form_product")[0].reset();
+      $("#mod_mantenimiento").modal("hide");
+      $("#product_data").DataTable().ajax.reload();
+
+      Swal.fire("¡REGISTRO DE PRODUCTO!", "Se registro correctamente", "success");
+    },
+  });
+}
+
+function updateProduct(product_id) {
+  $("#mod_title").html("Editar Registro");
+
+  $.post("../../controller/product.php?op=showProductToEdit", { product_id: product_id }, function (data) {
+    data = JSON.parse(data);
+    $("#product_id").val(data.product_id);
+    $("#product_name").val(data.product_name);
+    $("#product_description").val(data.product_description);
+  });
+
+  $("#mod_mantenimiento").modal("show");
+}
+
+function deleteProduct(product_id) {
+  Swal.fire({
+    title: "Eliminar producto",
+    text: "¿Estás seguro de eliminar el producto seleccionado?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Eliminar",
+    cancelButtonText: "Cancelar",
+    confirmButtonColor: "#198754",
+    cancelButtonColor: "#dc3545",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.post("../../controller/product.php?op=delete", { product_id }, function () {
+        $("#product_data").DataTable().ajax.reload();
+        Swal.fire("¡Producto eliminado!", "Tu producto ha sido eliminado satisfactoriamente", "success");
+      });
+    }
+  });
+}
+
+$(document).on("click", "#btn_addEditProduct", function () {
+  $("#mod_title").html("Nuevo Registro");
+  $("#mod_mantenimiento").modal("show");
+  $("#md_form_product")[0].reset();
+  $("#product_id").val("");
 });
 
 init();
