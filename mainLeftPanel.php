@@ -21,7 +21,10 @@
         </div>
       </a>
       <ul class="br-menu-sub nav flex-column">
-        <li class="nav-item"><a href="../MntoProducto/" class="nav-link">Producto</a></li>
+        <li class="nav-item"><a href="../mntoproduct" class="nav-link">Producto</a></li>
+      </ul>
+      <ul class="br-menu-sub nav flex-column">
+        <li class="nav-item"><a href="../mntocategory" class="nav-link">Categoría Producto</a></li>
       </ul>
     </div>
 

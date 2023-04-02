@@ -7,6 +7,14 @@ function init() {
 }
 
 $(document).ready(function () {
+  $("#category_id").select2({
+    dropdownParent: $("#mod_mantenimiento"),
+  });
+
+  $.post("../../controller/category.php?op=cmbCategory", function (data) {
+    $("#category_id").html(data);
+  });
+
   $table = $("#product_data")
     .dataTable({
       aProcessing: true, //Activamos el procesamiento del datatables
@@ -83,7 +91,9 @@ function updateProduct(product_id) {
     data = JSON.parse(data);
     $("#product_id").val(data.product_id);
     $("#product_name").val(data.product_name);
+    $("#category_id").val(data.category_id).trigger("change");
     $("#product_description").val(data.product_description);
+    $("#product_stock").val(data.product_stock);
   });
 
   $("#mod_mantenimiento").modal("show");
@@ -114,6 +124,7 @@ $(document).on("click", "#btn_addEditProduct", function () {
   $("#mod_mantenimiento").modal("show");
   $("#md_form_product")[0].reset();
   $("#product_id").val("");
+  $("#category_id").val("").trigger("change");
 });
 
 init();

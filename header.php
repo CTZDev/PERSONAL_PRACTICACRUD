@@ -32,6 +32,7 @@
  <link href="../../public/lib/jquery-switchbutton/jquery.switchButton.css" rel="stylesheet" />
  <link href="../../public/lib/datatables/jquery.dataTables.css" rel="stylesheet" />
  <link href="../../public/datatables/buttons.dataTables.min.css" rel="stylesheet" />
+ <link href="../../public/lib/select2/css/select2.min.css" rel="stylesheet">
 
  <!-- Bracket CSS -->
  <link href="../../public/css/bracket.css" media="screen" rel="stylesheet" type="text/css" />
@@ -53,6 +54,8 @@
  <script defer src="../../public/datatables/buttons.html5.min.js"></script>
  <script defer src="../../public/datatables/buttons.colVis.min.js"></script>
  <script defer src="../../public/datatables/jszip.min.js"></script>
+ <script defer src="../../public/lib/select2/js/select2.min.js"></script>
 
  <script defer src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
- <script defer type="text/javascript" src="mnto_producto.js"></script>
+ <script defer type="text/javascript" src="mnto_product.js"></script>
+ <!-- <script defer type="text/javascript" src="mnto_category.js"></script> -->

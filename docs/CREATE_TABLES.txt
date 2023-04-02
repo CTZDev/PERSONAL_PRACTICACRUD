@@ -8,3 +8,19 @@ CREATE TABLE IF NOT EXISTS tm_product (
     date_delete DATETIME NULL,
     state BIT DEFAULT 1,
     PRIMARY KEY(product_id));
+
+
+//CATEGORIA DE PRODUCTO
+CREATE TABLE IF NOT EXISTS tm_categoria (
+    category_id INT(11) NOT NULL AUTO_INCREMENT,
+    category_name VARCHAR(150) NOT NULL,
+    date_create DATETIME NOT NULL,
+    date_update DATETIME NULL,
+    date_delete DATETIME NULL,
+    state BIT DEFAULT 1,
+    PRIMARY KEY(category_id));
+
+    INSERT INTO `tm_categoria`
+    (`category_id`, `category_name`, `date_create`, `date_update`, `date_delete`, `state`)
+    VALUES (NULL, 'electro hogar', '2023-04-01 02:43:16.000000', NULL, NULL, b'1'),
+    (NULL, 'tecnología', '2023-04-01 02:43:16.000000', NULL, NULL, b'1')
